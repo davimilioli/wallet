@@ -4,7 +4,7 @@ import TableItem from "./TableItem";
 const Table = () => {
     const transactionCtx = useTransaction();
 
-    const handleEditTransaction = (id: number) => {
+    const handleRemoveTransaction = (id: number) => {
       transactionCtx?.dispatch({
         type: 'remove',
         payload : {
@@ -40,7 +40,7 @@ const Table = () => {
                         <TableItem
                           key={item.id}
                           item={item} 
-                          onDelete={handleEditTransaction}
+                          onDelete={handleRemoveTransaction}
                         /> 
                     )}
                 </tbody>
