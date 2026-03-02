@@ -4,10 +4,11 @@ import { categories } from "../data/categories";
 import { formatCurrency } from "../utils/formatCurrency";
 
 type Props = {
-    item: Item
+    item: Item;
+    onDelete: (id: number) => void;
 }
 
-const TableItem = ({item}: Props) => {
+const TableItem = ({item, onDelete}: Props) => {
     return (
         <tr className="hover:bg-gray-50 transition">
             <td className="px-6 py-4 text-gray-700">{item.id}</td>
@@ -16,6 +17,14 @@ const TableItem = ({item}: Props) => {
             <td className="px-6 py-4 text-gray-800 font-medium">{item.title}</td>
             <td className={`px-6 py-4 font-semibold text-right ${categories[item.category].expense ? 'text-red-600' : 'text-green-600'}`}>
                 {formatCurrency(item.value)}
+            </td>
+            <td className="px-6 py-4 text-gray-800 font-medium">
+                <button
+                    className="px-4 py-2 bg-gray-800 text-white rounded-lg cursor-pointer hover:bg-gray-700 transition"
+                    onClick={() => onDelete(item.id)}
+                >
+                    <img src="assets/icons/delete.svg" alt="Deletar"/>
+                </button>
             </td>
         </tr>
     )

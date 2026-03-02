@@ -4,6 +4,14 @@ import TableItem from "./TableItem";
 const Table = () => {
     const transactionCtx = useTransaction();
 
+    const handleEditTransaction = (id: number) => {
+      transactionCtx?.dispatch({
+        type: 'remove',
+        payload : {
+          id
+        }
+      })
+    }
 
     return (
         <div className="bg-white border border-gray-300 rounded-2xl shadow-sm">
@@ -23,12 +31,17 @@ const Table = () => {
                     <th className="px-6 py-3 font-semibold text-gray-600">Categoria</th>
                     <th className="px-6 py-3 font-semibold text-gray-600">Título</th>
                     <th className="px-6 py-3 font-semibold text-gray-600 text-right">Valor</th>
+                    <th className="px-6 py-3 font-semibold text-gray-600 text-right"></th>
                   </tr>
                 </thead>
 
                 <tbody className="divide-y divide-gray-200">
                     {transactionCtx?.items.map((item) => 
-                        <TableItem key={item.id} item={item}  /> 
+                        <TableItem
+                          key={item.id}
+                          item={item} 
+                          onDelete={handleEditTransaction}
+                        /> 
                     )}
                 </tbody>
               </table>

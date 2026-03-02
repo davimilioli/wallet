@@ -10,7 +10,14 @@ type AddTransaction = {
     }
 }
 
-export type TransactionsActions = AddTransaction;
+type RemoveTransaction = {
+    type: 'remove';
+    payload: {
+        id: number;
+    }
+}
+
+export type TransactionsActions = AddTransaction | RemoveTransaction;
 
 export const transationReducer = (state: Item[], action: TransactionsActions ) => {
     switch(action.type) {
@@ -23,7 +30,10 @@ export const transationReducer = (state: Item[], action: TransactionsActions ) =
                     title: action.payload.title,
                     value: action.payload.value
                 }
-            ]
+            ];
+        
+        case 'remove':
+            return state.filter((item) => item.id !== action.payload.id)
         default:
             return state;
     }
