@@ -17,7 +17,18 @@ type RemoveTransaction = {
     }
 }
 
-export type TransactionsActions = AddTransaction | RemoveTransaction;
+type EditTransaction = {
+    type: 'edit',
+    payload: {
+        id: number;
+        date: Date;
+        category: string;
+        title: string;
+        value: number;
+    }
+}
+
+export type TransactionsActions = AddTransaction | RemoveTransaction | EditTransaction;
 
 export const transationReducer = (state: Item[], action: TransactionsActions ) => {
     switch(action.type) {
@@ -33,7 +44,12 @@ export const transationReducer = (state: Item[], action: TransactionsActions ) =
             ];
         
         case 'remove':
-            return state.filter((item) => item.id !== action.payload.id)
+            return state.filter((item) => item.id !== action.payload.id);
+
+        case 'edit': 
+            return state.map((item) => item.id === action.payload.id ?  
+            {...action.payload} : item
+        )
         default:
             return state;
     }

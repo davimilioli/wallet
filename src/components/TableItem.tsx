@@ -5,10 +5,11 @@ import { formatCurrency } from "../utils/formatCurrency";
 
 type Props = {
     item: Item;
+    onEdit: (id: number) => void;
     onDelete: (id: number) => void;
 }
 
-const TableItem = ({item, onDelete}: Props) => {
+const TableItem = ({item, onEdit, onDelete}: Props) => {
     return (
         <tr className="hover:bg-gray-50 transition">
             <td className="px-6 py-4 text-gray-700">{item.id}</td>
@@ -19,12 +20,21 @@ const TableItem = ({item, onDelete}: Props) => {
                 {formatCurrency(item.value)}
             </td>
             <td className="px-6 py-4 text-gray-800 font-medium">
-                <button
-                    className="px-4 py-2 bg-gray-800 text-white rounded-lg cursor-pointer hover:bg-gray-700 transition"
-                    onClick={() => onDelete(item.id)}
-                >
-                    <img src="assets/icons/delete.svg" alt="Deletar"/>
-                </button>
+                <div className="flex gap-2 justify-center items-center">
+                    <button
+                        className="px-4 py-2 bg-gray-800 text-white rounded-lg cursor-pointer hover:bg-gray-700 transition"
+                        onClick={() => onEdit(item.id)}
+                    >
+                        <img src="assets/icons/edit.svg" alt="Editar"/>
+                    </button>
+                    <button
+                        className="px-4 py-2 bg-gray-800 text-white rounded-lg cursor-pointer hover:bg-gray-700 transition"
+                        onClick={() => onDelete(item.id)}
+                    >
+                        <img src="assets/icons/delete.svg" alt="Deletar"/>
+                    </button>
+
+                </div>
             </td>
         </tr>
     )

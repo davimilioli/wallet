@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import { useTransaction } from "../contexts/TransactionContext";
+import type { Item } from "../types/Item";
+import { formatDateForInput, formatBrazilianToDate } from "../utils/dateFilter";
 
 type Props = {
-    isOpen: boolean
     onClose: () => void;
+    itemToEdit?: Item | null;
 }
 
-const Modal = ({isOpen, onClose}: Props) => {
-    if(!isOpen) return null;
-
+const Modal = ({itemToEdit, onClose}: Props) => {
     const { dispatch } = useTransaction();
     const [dataInput, setDataInput] = useState<string>('');
     const [categoriaInput, setCategoriaInput] = useState<string>('');
@@ -17,25 +17,47 @@ const Modal = ({isOpen, onClose}: Props) => {
     const [valorInput, setValorInput] = useState<number>(0);
     const categoryKeys: string[] = Object.keys(categories);
 
-    const handleAddTransaction = () => {
-        const finalDate = dataInput ? new Date(dataInput) : new Date();
-        const finalCategory = categoriaInput || 'food';
-        const finalTitle = tituloInput.trim() || 'sem título';
-        const finalValue = valorInput || 0;
+    useEffect(() => {
+        if(itemToEdit){
+            setDataInput(formatDateForInput(itemToEdit.date));
+            setCategoriaInput(itemToEdit.category);
+            setTituloInput(itemToEdit.title);
+            setValorInput(itemToEdit.value)
+        } else {
+            setDataInput('');
+            setCategoriaInput('');
+            setTituloInput('');
+            setValorInput(0);
+        }
+    },[itemToEdit])
 
-        const data = {
-            date: finalDate,
-            category: finalCategory,
-            title: finalTitle,
-            value: finalValue
-        };
+    const handleSubmit = () => {
+        if(!itemToEdit){
+            dispatch({
+                type: 'add',
+                payload: {
+                    date: dataInput ? formatBrazilianToDate(dataInput) : new Date(),
+                    category: categoriaInput || 'food',
+                    title: tituloInput.trim() || 'sem título',
+                    value: valorInput || 0
+                }
+            });
 
-        dispatch({
-            type: 'add',
-            payload: data
-        })
+            clearInputs();
+        } else {
+          dispatch({
+                type: 'edit',
+                payload: {
+                    id: itemToEdit.id,
+                    date: formatBrazilianToDate(dataInput),
+                    category: categoriaInput,
+                    title: tituloInput,
+                    value: valorInput
 
-        clearInputs();
+                }
+            })
+        }
+        
         onClose();
     };
 
@@ -118,7 +140,7 @@ const Modal = ({isOpen, onClose}: Props) => {
                     <button 
                         className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
                         type="button"
-                        onClick={handleAddTransaction}
+                        onClick={handleSubmit}
                         >
                         Salvar
                     </button>

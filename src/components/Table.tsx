@@ -2,8 +2,13 @@ import { useState } from "react";
 import { useTransaction } from "../contexts/TransactionContext";
 import TableItem from "./TableItem";
 import DeleteTransactionModal from "./DeleteTransactionModal";
+import type { Item } from "../types/Item";
 
-const Table = () => {
+type Props = {
+  onEdit: (item: Item) => void
+}
+
+const Table = ({onEdit}: Props) => {
     const {items} = useTransaction();
     const [deleteId, setDeleteId] = useState<number | null>(null);
     
@@ -34,6 +39,7 @@ const Table = () => {
                         <TableItem
                           key={item.id}
                           item={item} 
+                          onEdit={() => onEdit(item)}
                           onDelete={setDeleteId}
                         /> 
                     )}

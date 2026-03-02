@@ -3,9 +3,21 @@ import Modal from "./components/Modal"
 import Summary from "./components/Summary"
 import Table from "./components/Table"
 import { TransactionProvider } from "./contexts/TransactionContext"
+import type { Item } from "./types/Item"
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<Item | null>(null);
+
+  const handleOpenEdit = (item: Item) => {
+    setEditingItem(item);
+    setIsModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setEditingItem(null);
+    setIsModalOpen(false);
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -25,8 +37,14 @@ const App = () => {
           </div>
 
           <Summary />
-          <Table />
-          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
+          <Table onEdit={handleOpenEdit}/>
+          {isModalOpen &&
+            <Modal
+              itemToEdit={editingItem}
+              onClose={handleCloseModal}
+            />
+          }
+
         </TransactionProvider>
       </div>
     </div>
