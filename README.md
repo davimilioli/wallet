@@ -1,73 +1,96 @@
-# React + TypeScript + Vite
+# Wallet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Wallet é um mini projeto de controle financeiro desenvolvido para praticar conceitos modernos de desenvolvimento front-end utilizando **React**, **TypeScript** e **TailwindCSS**.
 
-Currently, two official plugins are available:
+A aplicação permite registrar transações financeiras e visualizar o resumo das movimentações, separando ganhos e despesas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tecnologias Utilizadas
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- React
+- TypeScript
+- TailwindCSS
+- Vite
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Conceitos Praticados
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Este projeto foi desenvolvido com foco em prática de arquitetura e organização de código no React.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Principais conceitos aplicados:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Componentização
+A interface foi dividida em diversos componentes reutilizáveis para manter o código organizado e facilitar manutenção.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Context API
+Utilização de **Context** para compartilhar o estado global das transações entre os componentes da aplicação.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Reducers
+Uso de **Reducers** para gerenciar o estado das transações de forma previsível e escalável.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Estrutura de Pastas
+Organização do projeto em pastas com responsabilidades bem definidas:
+
+- **components** → componentes reutilizáveis
+- **contexts** → gerenciamento de estado global
+- **reducers** → lógica de atualização de estado
+- **utils** → funções utilitárias
+- **data** → dados fictícios utilizados na aplicação
+
+### Funções Utilitárias
+Foram criadas utilidades para:
+
+- Formatar **datas**
+- Converter **números para Real (R$)**
+- Calcular totais financeiros
+
+### Cálculos Financeiros
+A aplicação calcula automaticamente:
+
+- **Entradas (Income / Renda)**
+- **Saídas (Expense / Despesas)**
+- **Saldo total**
+
+### Dados Mockados
+Foi utilizada uma pasta `data` contendo:
+
+- categorias
+- itens fictícios
+
+Esses dados simulam um pequeno banco de dados para testes da aplicação.
+
+---
+
+## Objetivo do Projeto
+
+O objetivo deste mini projeto foi praticar:
+
+- Estruturação de aplicações React
+- Tipagem com TypeScript
+- Gerenciamento de estado com Context + Reducer
+- Organização de código
+- Criação de funções utilitárias
+- Estilização moderna com TailwindCSS
+
+---
+
+## Funcionalidades
+
+- Adicionar nova transação
+- Visualizar lista de transações
+- Ver resumo financeiro
+- Cálculo automático do saldo
+
+---
+
+## Projeto para Estudo
+
+Este projeto foi desenvolvido como **exercício de prática** para aprimorar conhecimentos em React e arquitetura de aplicações front-end.
+
+---
+
+## Autor
+
+Desenvolvido por **Davi Milioli**
