@@ -4,6 +4,10 @@ Wallet é um mini projeto de controle financeiro desenvolvido para praticar conc
 
 A aplicação permite registrar, excluir, editar transações financeiras e visualizar o resumo das movimentações, separando ganhos e despesas.
 
+<div align="center">
+  <img src="./public/assets/demo-project.gif" alt="Demonstração do Wallet" width="100%">
+</div>
+
 ---
 
 ## Tecnologias Utilizadas
