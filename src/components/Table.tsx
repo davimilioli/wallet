@@ -2,10 +2,10 @@ import { useTransaction } from "../contexts/TransactionContext";
 import TableItem from "./TableItem";
 
 const Table = () => {
-    const transactionCtx = useTransaction();
+    const {items, dispatch} = useTransaction();
 
     const handleRemoveTransaction = (id: number) => {
-      transactionCtx?.dispatch({
+      dispatch({
         type: 'remove',
         payload : {
           id
@@ -17,7 +17,7 @@ const Table = () => {
         <div className="bg-white border border-gray-300 rounded-2xl shadow-sm">
             <div className="border-b border-gray-200 px-6 py-4">
                 <h3 className="text-lg font-semibold text-gray-800">
-                  Transações ({transactionCtx?.items.length})
+                  Transações ({items.length})
                 </h3>
             </div>
 
@@ -36,7 +36,7 @@ const Table = () => {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200">
-                    {transactionCtx?.items.map((item) => 
+                    {items.map((item) => 
                         <TableItem
                           key={item.id}
                           item={item} 

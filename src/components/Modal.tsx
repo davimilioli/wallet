@@ -10,7 +10,7 @@ type Props = {
 const Modal = ({isOpen, onClose}: Props) => {
     if(!isOpen) return null;
 
-    const transactionCtx = useTransaction();
+    const { dispatch } = useTransaction();
     const [dataInput, setDataInput] = useState<string>('');
     const [categoriaInput, setCategoriaInput] = useState<string>('');
     const [tituloInput, setTituloInput] = useState<string>('');
@@ -30,7 +30,7 @@ const Modal = ({isOpen, onClose}: Props) => {
             value: finalValue
         };
 
-        transactionCtx?.dispatch({
+        dispatch({
             type: 'add',
             payload: data
         })

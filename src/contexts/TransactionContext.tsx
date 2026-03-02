@@ -20,4 +20,4 @@ export const TransactionProvider = ({children}: { children: ReactNode }) =>{
     )
 }
 
-export const useTransaction = () => useContext(TransactionContext);
+export const useTransaction = () => useContext(TransactionContext) as TransactionContextType;

@@ -3,10 +3,9 @@ import { calculateBalance } from "../utils/calculateBalance";
 import { formatCurrency } from "../utils/formatCurrency";
 
 const Summary = () => {
-    const transactionCtx = useTransaction();
-    if(transactionCtx === null) return;
+    const {items} = useTransaction();
 
-    const balance = calculateBalance(transactionCtx.items);
+    const balance = calculateBalance(items);
 
     return (
         <>
