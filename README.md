@@ -2,7 +2,7 @@
 
 Wallet é um mini projeto de controle financeiro desenvolvido para praticar conceitos modernos de desenvolvimento front-end utilizando **React**, **TypeScript** e **TailwindCSS**.
 
-A aplicação permite registrar transações financeiras e visualizar o resumo das movimentações, separando ganhos e despesas.
+A aplicação permite registrar, excluir, editar transações financeiras e visualizar o resumo das movimentações, separando ganhos e despesas.
 
 ---
 
@@ -12,6 +12,37 @@ A aplicação permite registrar transações financeiras e visualizar o resumo d
 - TypeScript
 - TailwindCSS
 - Vite
+
+---
+
+## Como rodar o projeto
+
+### Pré-requisitos
+
+Possuir `Node.js` instalado na máquina local.
+
+### Instalação
+
+1. Clone o Repositório
+```
+git@github.com:davimilioli/wallet.git
+```
+
+2. Acesse a pasta projeto
+```
+cd wallet
+```
+
+3. Instale as dependências
+```
+npm install
+```
+
+### Execução
+Para iniciar o servidor de desenvolvimento
+```
+npm run dev
+```
 
 ---
 
@@ -79,15 +110,11 @@ O objetivo deste mini projeto foi praticar:
 ## Funcionalidades
 
 - Adicionar nova transação
+- Editar transação
+- Excluir transação
 - Visualizar lista de transações
 - Ver resumo financeiro
 - Cálculo automático do saldo
-
----
-
-## Projeto para Estudo
-
-Este projeto foi desenvolvido como **exercício de prática** para aprimorar conhecimentos em React e arquitetura de aplicações front-end.
 
 ---
 
