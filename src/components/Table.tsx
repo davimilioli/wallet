@@ -1,18 +1,12 @@
+import { useState } from "react";
 import { useTransaction } from "../contexts/TransactionContext";
 import TableItem from "./TableItem";
+import DeleteTransactionModal from "./DeleteTransactionModal";
 
 const Table = () => {
-    const {items, dispatch} = useTransaction();
-
-    const handleRemoveTransaction = (id: number) => {
-      dispatch({
-        type: 'remove',
-        payload : {
-          id
-        }
-      })
-    }
-
+    const {items} = useTransaction();
+    const [deleteId, setDeleteId] = useState<number | null>(null);
+    
     return (
         <div className="bg-white border border-gray-300 rounded-2xl shadow-sm">
             <div className="border-b border-gray-200 px-6 py-4">
@@ -40,12 +34,18 @@ const Table = () => {
                         <TableItem
                           key={item.id}
                           item={item} 
-                          onDelete={handleRemoveTransaction}
+                          onDelete={setDeleteId}
                         /> 
                     )}
                 </tbody>
               </table>
             </div>
+            {deleteId && 
+              <DeleteTransactionModal 
+                id={deleteId}
+                onClose={() => setDeleteId(null)}
+              />
+            }
         </div>
     )
 }
